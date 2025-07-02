@@ -1,3 +1,7 @@
+# Build Tools - Must be first to avoid wheel build errors
+setuptools>=65.5.0
+wheel>=0.40.0
+
 # Django and REST Framework
 Django>=3.2.0,<4.0.0
 djangorestframework>=3.12.0,<4.0.0
@@ -32,10 +36,10 @@ django-cors-headers>=3.10.0,<4.0.0
 
 # PDF Generation
 reportlab>=3.6.0,<4.0.0
-weasyprint>=53.0.0,<54.0.0
+weasyprint==53.3  # Pinned to a stable version for deployment compatibility
 
 # Image Processing
-Pillow>=8.0.0,<10.0.0
+Pillow==9.5.0  # Pinned to avoid wheel build failures
 
 # Background Tasks
 APScheduler>=3.10.1,<4.0.0
