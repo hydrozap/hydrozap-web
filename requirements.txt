@@ -36,7 +36,7 @@ django-cors-headers>=3.10.0,<4.0.0
 
 # PDF Generation
 reportlab>=3.6.0,<4.0.0
-weasyprint==53.3  # Pinned to a stable version for deployment compatibility
+# weasyprint==53.3  # Pinned to a stable version for deployment compatibility
 
 # Image Processing
 Pillow==9.5.0  # Pinned to avoid wheel build failures
