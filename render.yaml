@@ -1,39 +1,27 @@
 services:
   - type: web
-    name: hydrozap-backend
+    name: hydrozap-web
     env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "daphne -b 0.0.0.0 -p 8000 hydrozap.asgi:application"
+    plan: free  # or use 'starter', 'standard', etc. if you’re on a paid plan
+
+    # ✅ Set the correct Python version to avoid Pillow/setup.py issues
+    build:
+      environment:
+        pythonVersion: 3.11.8
+
+    # ✅ Your start command for Daphne (ASGI-based Django Channels)
+    startCommand: >
+      daphne -b 0.0.0.0 -p 8000 hydrozap.asgi:application
+
+    # ✅ Optional: environment variables (.env should also exist in repo)
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: hydrozap.settings
-      - key: DJANGO_SECRET_KEY
-        value: django-insecure--%ss6u+^rf$#u^uk(12n99kou^#&%=b$s_%i8bt-@dwjtm=tp%
-      - key: FIREBASE_TYPE
-        value: service_account
-      - key: FIREBASE_PROJECT_ID
-        value: hydroponics-1bab7
-      - key: FIREBASE_PRIVATE_KEY_ID
-        value: 54370efcd76e02b3a27451aa98b58a8dfc40fd4f
-      - key: FIREBASE_PRIVATE_KEY
-        value: "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9...ZaVcg==\n-----END PRIVATE KEY-----\n"
-      - key: FIREBASE_CLIENT_EMAIL
-        value: firebase-adminsdk-fbsvc@hydroponics-1bab7.iam.gserviceaccount.com
-      - key: FIREBASE_CLIENT_ID
-        value: 109436593908648798097
-      - key: FIREBASE_AUTH_URI
-        value: https://accounts.google.com/o/oauth2/auth
-      - key: FIREBASE_TOKEN_URI
-        value: https://oauth2.googleapis.com/token
-      - key: FIREBASE_AUTH_PROVIDER_X509_CERT_URL
-        value: https://www.googleapis.com/oauth2/v1/certs
-      - key: FIREBASE_CLIENT_X509_CERT_URL
-        value: https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40hydroponics-1bab7.iam.gserviceaccount.com
-      - key: FIREBASE_UNIVERSE_DOMAIN
-        value: googleapis.com
-      - key: FIREBASE_API_KEY
-        value: AIzaSyBxr6fiKPQMKtRPKmynPZP9JO54tid9jP0
-      - key: EMAIL_HOST_USER
-        value: hydrozapservice@gmail.com
-      - key: EMAIL_HOST_PASSWORD
-        value: zwfi twyn hupb epwy
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: PORT
+        value: "8000"
+
+    # Optional: auto-deploy on push to main branch
+    autoDeploy: true
+    branch: main
