@@ -38,7 +38,7 @@ ALLOWED_HOSTS = [
     "192.168.100.77",  # Add your local network IP here
     "192.168.93.88",
     "192.168.100.15",
-    "hydrozap-backend.onrender.com",
+    "hydrozap-web.onrender.com",
     "hydrozap.vercel.app",
     
 ]
