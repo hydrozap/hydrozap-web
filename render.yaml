@@ -1,27 +1,16 @@
 services:
   - type: web
-    name: hydrozap-web
-    env: python
-    plan: free  # or use 'starter', 'standard', etc. if you’re on a paid plan
-
-    # ✅ Set the correct Python version to avoid Pillow/setup.py issues
-    build:
-      environment:
-        pythonVersion: 3.11.8
-
-    # ✅ Your start command for Daphne (ASGI-based Django Channels)
-    startCommand: >
-      daphne -b 0.0.0.0 -p 8000 hydrozap.asgi:application
-
-    # ✅ Optional: environment variables (.env should also exist in repo)
+    name: hydrozap-backend
+    runtime: python
+    buildCommand: |
+      echo "Using Python version:"
+      python --version
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput || true
+    startCommand: daphne -b 0.0.0.0 -p 10000 hydrozap.asgi:application
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: hydrozap.settings
-      - key: PYTHONUNBUFFERED
-        value: "1"
-      - key: PORT
-        value: "8000"
-
-    # Optional: auto-deploy on push to main branch
-    autoDeploy: true
-    branch: main
+      - key: PYTHON_VERSION
+        value: 3.11.9
