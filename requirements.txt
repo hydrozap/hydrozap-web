@@ -1,4 +1,4 @@
--prefer-binary
+
 # Build Tools - Must be first to avoid wheel build errors
 setuptools>=65.5.0
 wheel>=0.40.0
