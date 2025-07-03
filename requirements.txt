@@ -39,7 +39,7 @@ reportlab>=3.6.0,<4.0.0
 # weasyprint==53.3  # Pinned to a stable version for deployment compatibility
 
 # Image Processing
-Pillow==9.5.0  # Pinned to avoid wheel build failures
+Pillow==9.4.0  # Pinned to avoid wheel build failures
 
 # Background Tasks
 APScheduler>=3.10.1,<4.0.0
